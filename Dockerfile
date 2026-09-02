@@ -3,6 +3,8 @@ FROM ubuntu:24.04
 ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update && apt-get install -y \
+    ttyd \
+    tmux \
     curl \
     wget \
     git \
@@ -11,18 +13,12 @@ RUN apt-get update && apt-get install -y \
     vim \
     bash \
     ca-certificates \
-    build-essential \
-    python3 \
+    iputils-ping \
+    procps \
     && rm -rf /var/lib/apt/lists/*
 
-# Install Node.js 22
-RUN curl -fsSL https://deb.nodesource.com/setup_22.x | bash - \
-    && apt-get install -y nodejs \
-    && node --version \
-    && npm --version
-
-# Install WeTTY
-RUN npm install -g wetty
+# Terminal prompt
+RUN echo "export PS1='root@azmal:\w# '" >> /root/.bashrc
 
 COPY start.sh /start.sh
 RUN chmod +x /start.sh
