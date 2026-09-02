@@ -5,6 +5,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && apt-get install -y \
     ttyd \
     tmux \
+    supervisor \
     curl \
     wget \
     git \
@@ -21,6 +22,8 @@ RUN apt-get update && apt-get install -y \
 RUN echo "export PS1='root@azmal:\w# '" >> /root/.bashrc
 
 COPY start.sh /start.sh
+COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+
 RUN chmod +x /start.sh
 
 CMD ["/start.sh"]
