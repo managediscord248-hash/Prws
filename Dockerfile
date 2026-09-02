@@ -13,10 +13,15 @@ RUN apt-get update && apt-get install -y \
     ca-certificates \
     build-essential \
     python3 \
-    nodejs \
-    npm \
     && rm -rf /var/lib/apt/lists/*
 
+# Install Node.js 22
+RUN curl -fsSL https://deb.nodesource.com/setup_22.x | bash - \
+    && apt-get install -y nodejs \
+    && node --version \
+    && npm --version
+
+# Install WeTTY
 RUN npm install -g wetty
 
 COPY start.sh /start.sh
