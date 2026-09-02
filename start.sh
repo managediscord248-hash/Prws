@@ -3,10 +3,9 @@ set -e
 
 PORT="${PORT:-10000}"
 
-echo "Starting Ubuntu web terminal on port ${PORT}..."
+echo "Starting WeTTY on port ${PORT}..."
 
-exec ttyd \
-    -p "${PORT}" \
-    -i 0.0.0.0 \
-    -W \
-    /bin/bash
+exec wetty \
+  --port "${PORT}" \
+  --host 0.0.0.0 \
+  --command bash
