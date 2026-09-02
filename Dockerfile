@@ -3,17 +3,21 @@ FROM ubuntu:24.04
 ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update && apt-get install -y \
-    ttyd \
     curl \
     wget \
-    sudo \
     git \
-    bash \
+    sudo \
     nano \
     vim \
-    iputils-ping \
+    bash \
     ca-certificates \
+    build-essential \
+    python3 \
+    nodejs \
+    npm \
     && rm -rf /var/lib/apt/lists/*
+
+RUN npm install -g wetty
 
 COPY start.sh /start.sh
 RUN chmod +x /start.sh
